@@ -1,0 +1,22 @@
+version: '3.3'
+services:
+  stirling-pdf:
+    image: frooodle/s-pdf:latest
+    ports:
+      - '8200:8080'
+    volumes:
+      - ./trainingData:/usr/share/tessdata #Required for extra OCR languages
+      - ./extraConfigs:/configs
+      - ./customFiles:/customFiles/
+      - ./logs:/logs/
+    environment:
+      - DOCKER_ENABLE_SECURITY=true
+      - SECURITY_ENABLELOGIN=true
+      - SECURITY_INITIALLOGIN_USERNAME=admin
+      - SECURITY_INITIALLOGIN_PASSWORD=adminpass
+      - INSTALL_BOOK_AND_ADVANCED_HTML_OPS=false
+      - LANGS=en-EN
+      - UI_APP_NAME=PDF Tools Online
+      - UI_HOME_DESCRIPTION=PDF Tools Online - Effortlessly edit, convert, compress, and manage your PDF documents with our fast and user-friendly platform. Secure, cloud-based, and accessible from anywhere.
+      - UI_APP_NAVBAR_NAME=PDF Tools Online
+    restart: always
